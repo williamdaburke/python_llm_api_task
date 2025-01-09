@@ -1,0 +1,23 @@
+UK legislation and rules regulating markets in financial instruments (UK MiFID framework) cover firms that provide services to clients linked to ‘financial instruments’ (generally: shares, bonds, units in collective investment schemes and financial and commodity derivatives), and the venues where those instruments are traded.
+
+For investment firms that undertake investment services and activities, the UK MiFID framework sets requirements in a number of broad areas including:
+
+conditions and procedures for authorisation
+organisational requirements, including rules on handling of client assets
+conduct of business requirements
+pre- and post-trade transparency requirements when dealing over-the-counter in financial instruments
+transaction reporting
+There are 3 types of trading venues: regulated markets, multilateral trading facilities and organised trading facilities. The UK MiFID framework sets requirements for trading venues in a number of broad areas including:
+
+organisational requirements
+pre- and post-trade transparency requirements
+controls on algorithmic and high-frequency trading
+requirements on access to trading venues and admission of financial instruments to trading
+suspension and removal of financial instruments from trading
+The UK MiFID framework as onshored commenced in full at the end of the transition period at 11pm on 31 December 2020.
+
+The EU MiFID framework was transposed and implemented in the UK by a combination of Handbook rules, Treasury legislation, and directly applicable EU regulations (in the latter case, notably by EU MIFIR (No 600/2014), the MiFID Org Regulation ((EU) 2017/565) and a number of RTSs/ITSs).
+
+In relation to Handbook rules, for example, firms operating multilateral trading facilities or organised trading facilities are subject to various requirements set out in the Handbook, notably in MAR, SYSC, COBS and SUP 17A (and the source of the corresponding MiFID requirement is referred to below the relevant provision). Where appropriate, amendments have now been made by FCA Handbook instruments to ‘onshore’ these rules to reflect the withdrawal of the United Kingdom from the European Union.
+
+The Treasury legislation that is part of the UK MiFID framework is listed below, together with the legislation that made changes to the relevant Treasury legislation and directly applicable EU regulations as part of the UK’s withdrawal from the EU. Please note that links to statutory instruments relate to the instrument when made, so you may need to update your search of the relevant legislation.
