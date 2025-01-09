@@ -121,15 +121,16 @@ def main(file_path : str) -> None:
     NOTE: currently, the summary is just a mock function and in the future, 
     we will use a real LLM to generate the summary.
     """
+    log.info(f'Extractiong requirements from {file_path}')
     txt = read_file(file_path)
-    log.info(f'Found text len {len(txt)} in file {file_path}')
+    log.info(f'Found text len {len(txt)} in file.')
 
     raw_sections = split_text(txt)
     sections = [preprocess_text(x) for x in raw_sections]
     if not sections:
         log.error("Error: File not found, file empty, or permission denied.")
         return
-    log.info(f'Found {len(sections)} sections in file {file_path}')
+    log.info(f'Found {len(sections)} separate sections.')
     output_object = defaultdict(dict)
 
     for i, section in enumerate(sections):
