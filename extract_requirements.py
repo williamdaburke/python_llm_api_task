@@ -32,7 +32,7 @@ def simulate_llm_summary(text_section: str) -> str:
     """
     words = text_section.split()
     return ' '.join(reversed(words))
-    
+
 
 def preprocess_text(text : str) -> str:
     """
