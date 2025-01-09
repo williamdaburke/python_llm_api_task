@@ -1,7 +1,7 @@
 """Unit tests for extract_requirements.py"""
 import os
 import unittest
-from extract_requirements import read_file, preprocess_text, simulate_llm_summary
+from extract_requirements import read_file, preprocess_text, simulate_llm_summary, split_text
 
 
 class TestFunctions(unittest.TestCase):
@@ -25,6 +25,20 @@ class TestFunctions(unittest.TestCase):
         text = '<p>Hello, World!</p>'
         expected_output = 'hello world'
         self.assertEqual(preprocess_text(text), expected_output)
+
+    def test_split_text(self):
+        """
+        Test simulate_llm_summary in a sample text
+        """
+        text = """
+        this is a test\n\nso is this
+        and this
+        
+        and this
+        - here too
+        """
+        expected_output = ['this is a test','so is this', 'and this','and this', '- here too']
+        self.assertEqual(split_text(text), expected_output)
 
     def test_simulate_llm_summary(self):
         """

@@ -1,10 +1,16 @@
 """This module takes a file path as input, reads the text, splits into sections by paragraph,
     creates a summary of each paragraph, and saves a json file."""
 import sys
+import os
 import re
 import json
+import logging
 
 from collections import defaultdict
+
+logging.basicConfig()
+log = logging.getLogger(__name__)
+log.setLevel(logging.INFO)
 
 
 def get_llm_summary(text_section: str,
@@ -68,22 +74,33 @@ def read_file(file_path : str) -> str:
     try:
         with open(file_path, "r") as f:
             return f.read()
+
     except FileNotFoundError as e:
-        print(f"Error: File not found at {file_path}.: {e}")
+        log.error(f"Error: File not found at {file_path}.: {e}")
         return ""
     except PermissionError as e:
-        print(f"Error: Permission denied to read file at {file_path}.: {e}")
+        log.error(f"Error: Permission denied to read file at {file_path}.: {e}")
         return ""
     except IsADirectoryError as e:
-        print(f"Error: {file_path} is a directory, not a file.: {e}")
+        log.error(f"Error: {file_path} is a directory, not a file.: {e}")
         return ""
     except OSError as e:
-        print(f"Error: An OS-related error occurred while reading file at {file_path}: {e}")
+        log.error(f"Error: An OS-related error occurred while reading file at {file_path}: {e}")
         return ""
     except TypeError as e:
         # if file path is not a string
-        print(f"Error: A type-related error occurred: {e}")
+        log.error(f"Error: A type-related error occurred: {e}")
         return ""
+
+
+def split_text(txt) -> list:
+    res = []
+    for x in txt.split(os.linesep + os.linesep):
+        for y in x.split('\n'):
+            for j in re.split(r"(?:\r?\n){2,}", y.strip()):
+                if j:
+                    res.append(j)
+    return res
 
 
 def main(file_path : str) -> None:
@@ -104,24 +121,30 @@ def main(file_path : str) -> None:
     NOTE: currently, the summary is just a mock function and in the future, 
     we will use a real LLM to generate the summary.
     """
-    file_txt = read_file(file_path)
-    file_txt = preprocess_text(file_txt)
-    if not file_txt:
-        print("Error: File not found, file empty, or permission denied.")
-        return
+    txt = read_file(file_path)
+    log.info(f'Found text len {len(txt)} in file {file_path}')
 
-    paragraphs = file_txt.split('\n\n')
+    raw_sections = split_text(txt)
+    sections = [preprocess_text(x) for x in raw_sections]
+    if not sections:
+        log.error("Error: File not found, file empty, or permission denied.")
+        return
+    log.info(f'Found {len(sections)} sections in file {file_path}')
     output_object = defaultdict(dict)
 
-    for i, paragraph in enumerate(paragraphs):
-        output_object[i]['text'] = paragraph
-        output_object[i]['summary'] = get_llm_summary(paragraph)
+    for i, section in enumerate(sections):
+        output_object[i]['text'] = section
+        output_object[i]['summary'] = get_llm_summary(section)
 
     with open('extracted_requirements.json', 'w') as f:
         json.dump(output_object, f, indent=4)
+
+    log.info(f'Saved summaries to extracted_requirements.json')
 
 
 if "__main__" == __name__:
     if len(sys.argv) > 1:
         file_path = sys.argv[1]
         main(file_path)
+    else:
+        log.error('Please add filepath argument')
