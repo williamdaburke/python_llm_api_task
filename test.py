@@ -47,6 +47,14 @@ class TestFunctions(unittest.TestCase):
         text = 'this is a test'
         expected_output = 'test a is this'
         self.assertEqual(simulate_llm_summary(text), expected_output)
+        
+    def paragraph_count_test(self):
+        """
+        Test simulate_llm_summary in a sample text
+        """
+        text = read_file('regulations.txt')
+        raw_sections = split_text(text)
+        self.assertEqual(17, len(raw_sections))
 
 if __name__ == '__main__':
     unittest.main()

@@ -96,7 +96,7 @@ def read_file(file_path : str) -> str:
 def split_text(txt) -> list:
     res = []
     for x in txt.split(os.linesep + os.linesep):
-        for y in x.split('\n'):
+        for y in x.strip().split('\n'):
             for j in re.split(r"(?:\r?\n){2,}", y.strip()):
                 if j:
                     res.append(j)
