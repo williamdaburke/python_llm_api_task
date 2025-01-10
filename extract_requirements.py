@@ -5,6 +5,8 @@ import os
 import re
 import json
 import logging
+import time
+from datetime import timedelta
 
 from collections import defaultdict
 
@@ -110,11 +112,13 @@ def main(file_path : str) -> None:
     {
         0: {
             'text': '...',
-            'summary': '...'
+            'summary': '...',
+            'execution_time': '...'
         },
         1: {
             'text': '...',
-            'summary': '...'
+            'summary': '...',
+            'execution_time': '...'
         },
         ...
     }
@@ -135,7 +139,10 @@ def main(file_path : str) -> None:
 
     for i, section in enumerate(sections):
         output_object[i]['text'] = section
+        start = time.time()
         output_object[i]['summary'] = get_llm_summary(section)
+        end = time.time()
+        output_object[i]['execution_time'] = str(timedelta(seconds=end-start))
 
     with open('extracted_requirements.json', 'w') as f:
         json.dump(output_object, f, indent=4)
