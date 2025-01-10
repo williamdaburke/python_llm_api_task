@@ -24,4 +24,4 @@ There is an example text which can be used called `regulations.txt`
 
 Unit tests are also available by running: 
 
-`python text.py`
+`python test.py`
